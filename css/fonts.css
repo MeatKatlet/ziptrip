@@ -1,0 +1,30 @@
+@charset "utf-8";
+/* CSS Document */
+
+@font-face {
+	font-family: Segoe UI;
+	src: url(fonts/Segoe UI.eot?iefix#) format('embedded-opentype'), 
+	url(fonts/Segoe UI.ttf) format('truetype'), 
+	url(fonts/Segoe UI.woff) format('woff'), 
+	url(fonts/Segoe UI.svg) format('svg');
+}
+@font-face {
+	font-family: Myriad Pro;
+	src: url(fonts/Segoe UI.eot) format('embedded-opentype'), 
+	url(fonts/MyriadPro Regular.otf) format('truetype'),
+	url(fonts/Segoe UI.woff) format('woff'),
+	url(fonts/Segoe UI.svg) format('svg');
+}
+@font-face {
+	font-family: Segoe UI Semibold;
+	src: url(fonts/Segoe UI.eot?iefix#) format('embedded-opentype'), 
+	url(fonts/seguisb.ttf) format('truetype'), 
+	url(fonts/Segoe UI.woff) format('woff'), 
+	url(fonts/Segoe UI.svg) format('svg');
+}
+#leftmenu > a, #rightmenu > a, #a > div.punkt, #addobrclicked > div.punkt, #b > div.punkt, #addobr > span, #addobr:hover, #countmests, .punktname, #showtext, .punktA, .punktB {
+	font-family: Segoe UI;
+}
+#reys, #timestart, .timestart, .timearrival, .freemest, .price, #timearrival, #freemest, #price, #breandcrumbs, #date1, #date2, #date1 > span, #date2 > span, .pricetext, .adaltprice, .yangprice, .buy-button {
+	font-family: Myriad Pro;
+   }

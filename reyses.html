@@ -1,0 +1,335 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="js/jquery-1.3.1.min.js" ></script>
+	<script type="text/javascript" src="js/jquery.easing.1.3.js" ></script>
+	<link href="css/style.css" type="text/css" rel="stylesheet">
+	<link href="css/fonts.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript">
+	<!--//<![CDATA[
+		$(document).ready(function(){
+		$("#date1").click(function(){
+			$("#date1").css("background-image", "none");
+			"block-vidvig1"
+			$("#block-vidvig1").slideToggle("slow");
+	});
+		$("#date2").click(function(){
+			$("#block-vidvig2").slideToggle("slow");
+	});
+		$('#addobr').mouseenter(function(){
+			$("#addobr > span").css({
+	'font-family': 'Segoe UI',
+	'font-size': '12px',
+	'color': '#FFF'
+ });
+			$("#roundarrow").css({
+'background-image': 'none',
+'border': 'none'
+  });
+	});
+	$('#addobr').mouseleave(function(){
+			$("#addobr > span").css({
+	'font-family': 'Segoe UI',
+	'font-size': '12px',
+	'color': '#2F2F2F'
+ });
+			$("#roundarrow").css({
+'background-image': 'url(images/roundarrow.png)',
+'background-repeat': 'no-repeat',
+'border': '1px solid #ececec',
+'background-position': 'center 2px'
+  });
+	});
+	//анимация при нажатии на добавить обратный маршрут
+	var handler = function() {
+  		this.setAttribute("id", "addobrclicked");
+		$("#addobrclicked").html('<div class="punkt">A</div><input type="text" class="punktname"><div id="punktdelete"></div>');
+		 $('#addobrclicked').unbind('click');
+		 $('#punktdelete').bind('click', handler2);
+};
+	var handler2 = function() {
+		var del = document.getElementById('addobrclicked');
+		del.setAttribute("id", "addobr");
+		$('#addobr').bind('click', handler);
+		$("#addobr").html('<div id="roundarrow"></div><span>добавить обратный рейс</span>');
+		$('#addobr').bind('click', handler);
+          return false; // Отмена и всплытия события, и поведения браузера по умолчанию - перехода по ссылке. 
+}
+	$('#addobr').bind('click', handler);
+	
+	//анимация плитки под картой easeOutCubic
+	$(".plitka").mouseover(function(){
+		$(this).stop().animate({width:'312px'},{queue:false, duration:600, easing: 'easeOutQuad'})
+	});
+	$(".plitka").mouseout(function(){
+		$(this).stop().animate({width:'152px'},{queue:false, duration:600, easing: 'easeOutQuad'})
+	});
+	/*$(".plitka").hover(function(){
+	 	$(this).stop().animate({width:'312px'},{queue:false, easing: 'easeOutQuad'})
+	 	$("#firstplitka").stop().animate({width:'152px'},{queue:false, easing: 'easeOutQuad'})
+	 	});*/ 
+
+	/*$(".plitka").mouseover(function(){
+		$("#firstplitka").stop().animate({width:'152px'},{queue:false, easing: 'easeOutQuad'})
+		$(this).stop().animate({width:'312px'},{queue:false, easing: 'easeOutQuad'})
+		//document.getElementById("firstplitka").removeAttribute("id");
+		//this.setAttribute("id", "firstplitka");
+	});
+	$(".plitka").mouseout(function(){
+		//$("#firstplitka").stop().animate({width:'312px'},{queue:false, duration:600, easing: 'easeOutQuad'})
+	$(this).stop().animate({width:'152px'},{queue:false, easing: 'easeOutQuad'})
+	});*/
+	/*$("#plitki").mouseout(function(){
+		$("#firstplitka").stop().animate({width:'312px'},{queue:false, easing: 'easeOutQuad'})
+	});*/
+
+});
+
+	//]]>->
+	</script>
+</head>	
+<body>
+	<div id="maincanvas">
+		<div id="header">
+		<div id="leftmenu">
+			<a href="">Главная</a>
+			<a href="">Расписание</a>
+			<a href="">Возврат</a>
+		</div>
+		<div id="logo"></div>
+		<div id="rightmenu">
+			<a href="">Вход</a>
+			<div id="line"></div>
+			<a href="">Регистрация</a>
+		</div>
+	</div>
+	<div id="maincontent">
+		<form id="mainform">
+	<div id="nadpis"></div>
+<div id="a">
+	<div class="punkt">A</div>
+	<input type="text" class="punktname">
+	<div id="date1"><span>21</span>июн</div>
+</div>
+<div id="block-vidvig1"></div>
+<div class="triangle"></div>
+<div id="b">
+	<div class="punkt">B</div>
+	<input type="text" class="punktname">
+	<div id="date2"></div>
+</div>
+<div id="block-vidvig2"></div>
+<div class="triangle"></div>
+<div id="addobr">
+	<div id="roundarrow"></div>
+	<span>добавить обратный рейс</span>
+</div>
+<div id="mesta">
+	<div id="countmests">количество мест</div>
+	<div class="countmest">3</div>
+	<div class="countmest" id="active_count">2</div>
+	<div class="countmest">1</div>
+</div>
+<div id="show">
+	<div id="showtext">Показать расписание</div>
+	<!--<div id="findarrow"></div>-->
+</div>
+</form>
+		<div id="blockofreyses">
+		<div id="breandcrumbs"> <span id="breandcrumbs1">Выбор рейса</span> \ <span id="breandcrumbs2">Выбор посадочных мест</span></div>
+		<div id="coloms-names">
+			<div id="reys">Маршрут</div>
+			<div id="timestart">Отправление</div>
+			<div id="timearrival">Прибытие</div>
+			<div id="freemest">Места</div>
+			<div id="price">Цена</div>
+		</div>
+		<div class="reys-container">
+			<div class="reys-default">
+			<div class="reys">
+				<div class="punktA">Москва →</div>
+				<div class="punktB">Санкт-Петербург</div>
+			</div>
+			<div class="timestart">21:00</div>
+			<div class="timearrival">08:00</div>
+			<div class="freemest">49</div>
+			<div class="price">
+				<div class="adalt"><span class="pricetext">Взрослый</span><span class="adaltprice">340 р.</span></div>
+				<div class="yang"><span class="pricetext">Детский</span><span class="yangprice">170 р.</span></div>
+			</div>
+			</div>
+			<div class="buy-button">Купить</div>
+		</div>
+		<div class="reys-container">
+			<div class="reys-default">
+			<div class="reys">
+				<div class="punktA">Москва →</div>
+				<div class="punktB">Санкт-Петербург</div>
+			</div>
+			<div class="timestart">21:00</div>
+			<div class="timearrival">08:00</div>
+			<div class="freemest">49</div>
+			<div class="price">
+				<div class="adalt"><span class="pricetext">Взрослый</span><span class="adaltprice">340 р.</span></div>
+				<div class="yang"><span class="pricetext">Детский</span><span class="yangprice">170 р.</span></div>
+			</div>
+			</div>
+			<div class="buy-button">Купить</div>
+		</div>
+		<div class="reys-container">
+			<div class="reys-default">
+			<div class="reys">
+				<div class="punktA">Москва →</div>
+				<div class="punktB">Санкт-Петербург</div>
+			</div>
+			<div class="timestart">21:00</div>
+			<div class="timearrival">08:00</div>
+			<div class="freemest">49</div>
+			<div class="price">
+				<div class="adalt"><span class="pricetext">Взрослый</span><span class="adaltprice">340 р.</span></div>
+				<div class="yang"><span class="pricetext">Детский</span><span class="yangprice">170 р.</span></div>
+			</div>
+			</div>
+			<div class="buy-button">Купить</div>
+		</div>
+		<div class="reys-container">
+			<div class="reys-default">
+			<div class="reys">
+				<div class="punktA">Москва →</div>
+				<div class="punktB">Санкт-Петербург</div>
+			</div>
+			<div class="timestart">21:00</div>
+			<div class="timearrival">08:00</div>
+			<div class="freemest">49</div>
+			<div class="price">
+				<div class="adalt"><span class="pricetext">Взрослый</span><span class="adaltprice">340 р.</span></div>
+				<div class="yang"><span class="pricetext">Детский</span><span class="yangprice">170 р.</span></div>
+			</div>
+			</div>
+			<div class="buy-button">Купить</div>
+		</div>
+		<div class="reys-container">
+			<div class="reys-default">
+			<div class="reys">
+				<div class="punktA">Москва →</div>
+				<div class="punktB">Санкт-Петербург</div>
+			</div>
+			<div class="timestart">21:00</div>
+			<div class="timearrival">08:00</div>
+			<div class="freemest">49</div>
+			<div class="price">
+				<div class="adalt"><span class="pricetext">Взрослый</span><span class="adaltprice">340 р.</span></div>
+				<div class="yang"><span class="pricetext">Детский</span><span class="yangprice">170 р.</span></div>
+			</div>
+			</div>
+			<div class="buy-button">Купить</div>
+		</div>
+		<div class="reys-container">
+			<div class="reys-default">
+			<div class="reys">
+				<div class="punktA">Москва →</div>
+				<div class="punktB">Санкт-Петербург</div>
+			</div>
+			<div class="timestart">21:00</div>
+			<div class="timearrival">08:00</div>
+			<div class="freemest">49</div>
+			<div class="price">
+				<div class="adalt"><span class="pricetext">Взрослый</span><span class="adaltprice">340 р.</span></div>
+				<div class="yang"><span class="pricetext">Детский</span><span class="yangprice">170 р.</span></div>
+			</div>
+			</div>
+			<div class="buy-button">Купить</div>
+		</div>
+		<div class="reys-container">
+			<div class="reys-default">
+			<div class="reys">
+				<div class="punktA">Москва →</div>
+				<div class="punktB">Санкт-Петербург</div>
+			</div>
+			<div class="timestart">21:00</div>
+			<div class="timearrival">08:00</div>
+			<div class="freemest">49</div>
+			<div class="price">
+				<div class="adalt"><span class="pricetext">Взрослый</span><span class="adaltprice">340 р.</span></div>
+				<div class="yang"><span class="pricetext">Детский</span><span class="yangprice">170 р.</span></div>
+			</div>
+			</div>
+			<div class="buy-button">Купить</div>
+		</div>
+		<div class="reys-container">
+			<div class="reys-default">
+			<div class="reys">
+				<div class="punktA">Москва →</div>
+				<div class="punktB">Санкт-Петербург</div>
+			</div>
+			<div class="timestart">21:00</div>
+			<div class="timearrival">08:00</div>
+			<div class="freemest">49</div>
+			<div class="price">
+				<div class="adalt"><span class="pricetext">Взрослый</span><span class="adaltprice">340 р.</span></div>
+				<div class="yang"><span class="pricetext">Детский</span><span class="yangprice">170 р.</span></div>
+			</div>
+			</div>
+			<div class="buy-button">Купить</div>
+		</div>
+		<div class="reys-container">
+			<div class="reys-default">
+			<div class="reys">
+				<div class="punktA">Москва →</div>
+				<div class="punktB">Санкт-Петербург</div>
+			</div>
+			<div class="timestart">21:00</div>
+			<div class="timearrival">08:00</div>
+			<div class="freemest">49</div>
+			<div class="price">
+				<div class="adalt"><span class="pricetext">Взрослый</span><span class="adaltprice">340 р.</span></div>
+				<div class="yang"><span class="pricetext">Детский</span><span class="yangprice">170 р.</span></div>
+			</div>
+			</div>
+			<div class="buy-button">Купить</div>
+		</div>
+		<div class="reys-container">
+			<div class="reys-default">
+			<div class="reys">
+				<div class="punktA">Москва →</div>
+				<div class="punktB">Санкт-Петербург</div>
+			</div>
+			<div class="timestart">21:00</div>
+			<div class="timearrival">08:00</div>
+			<div class="freemest">49</div>
+			<div class="price">
+				<div class="adalt"><span class="pricetext">Взрослый</span><span class="adaltprice">340 р.</span></div>
+				<div class="yang"><span class="pricetext">Детский</span><span class="yangprice">170 р.</span></div>
+			</div>
+			</div>
+			<div class="buy-button">Купить</div>
+		</div>
+		<div class="reys-container">
+			<div class="reys-default">
+			<div class="reys">
+				<div class="punktA">Москва →</div>
+				<div class="punktB">Санкт-Петербург</div>
+			</div>
+			<div class="timestart">21:00</div>
+			<div class="timearrival">08:00</div>
+			<div class="freemest">49</div>
+			<div class="price">
+				<div class="adalt"><span class="pricetext">Взрослый</span><span class="adaltprice">340 р.</span></div>
+				<div class="yang"><span class="pricetext">Детский</span><span class="yangprice">170 р.</span></div>
+			</div>
+			</div>
+			<div class="buy-button">Купить</div>
+		</div>
+		</div>
+		<div id="plitki">
+	<!--<div id="firstplitka"></div>-->
+	<div class="plitka"></div>
+	<div class="plitka"></div>
+	<div class="plitka"></div>
+	<div class="plitka"></div>
+</div>
+	</div>
+	</div>
+	<div id="footer"></div>
+</body>
+</html>
